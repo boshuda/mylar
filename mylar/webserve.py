@@ -3905,7 +3905,7 @@ class WebInterface(object):
         raise cherrypy.HTTPRedirect("importResults")
     deleteimport.exposed = True
 
-    def preSearchit(self, ComicName, comiclist=None, mimp=0, volume=None, displaycomic=None, comicid=None, dynamicname=None, displayline=None):
+    def preSearchit(self, ComicName, comiclist=None, mimp=0, volume=None, displaycomic=None, comicid=None, dynamicname=None, displayline=None, ComicRootPath=None, StartYear=None):
         if mylar.IMPORTLOCK:
             logger.info('[IMPORT] There is an import already running. Please wait for it to finish, and then you can resubmit this import.')
             return

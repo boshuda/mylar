@@ -71,10 +71,10 @@ def processIssue(dirName, nzbName=None, failed=False, comicrn_version=None):
 
     if use_requests is True:
         try:
-            print("Opening URL for post-process of %s @ %s/forceProcess:" % (dirName,url))
+            print("Opening URL for post-process of %s @ %s/forceProcess:" % (dirName, url))
             pp = requests.post(url, params=params, verify=False)
         except Exception as e:
-            print("Unable to open URL: %s" %e)
+            print("Unable to open URL: %s" % e)
             sys.exit(1)
         else:
             print 'statuscode: %s' % pp.status_code

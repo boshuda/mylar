@@ -31,12 +31,12 @@ from cherrypy.lib.static import serve_file, serve_download
 import datetime
 
 cmd_list = ['getIndex', 'getComic', 'getUpcoming', 'getWanted', 'getHistory',
-            'getLogs', 'clearLogs','findComic', 'addComic', 'delComic',
+            'getLogs', 'clearLogs', 'findComic', 'addComic', 'delComic',
             'pauseComic', 'resumeComic', 'refreshComic', 'addIssue',
             'queueIssue', 'unqueueIssue', 'forceSearch', 'forceProcess',
-            'getVersion', 'checkGithub','shutdown', 'restart', 'update',
+            'getVersion', 'checkGithub', 'shutdown', 'restart', 'update',
             'getComicInfo', 'getIssueInfo', 'getArt', 'downloadIssue',
-            'downloadNZB', 'getReadList', 'getStoryArc', 'addStoryArc']
+            'downloadNZB', 'getReadList', 'getStoryArc', 'addStoryArc', 'addseries']
 
 
 class Api(object):
@@ -97,6 +97,7 @@ class Api(object):
 
         if kwargs['cmd'] not in cmd_list:
             self.data = self._error_with_message('Unknown command: %s' % kwargs['cmd'])
+            logger.debug('Unknown command: %s' % kwargs['cmd'])
             return
         else:
             self.cmd = kwargs.pop('cmd')
@@ -169,7 +170,7 @@ class Api(object):
         if mylar.CONFIG.ANNUALS_ON:
             annuals = self._dic_from_query('SELECT * FROM annuals WHERE ComicID="' + self.id + '"')
         else:
-            annuals = None
+            annuals = []
 
         self.data = {'comic': comic, 'issues': issues, 'annuals': annuals}
         return
@@ -277,6 +278,18 @@ class Api(object):
             self.data = e
 
         return
+
+    def _addseries(self, **kwargs):
+        logger.info("Received request to add a series: ")
+        logger.info(kwargs)
+        kwargs['comicid']
+        kwargs['filedir']
+        kwargs['comicname']
+        kwargs['startyear']
+        wi = webserve.WebInterface()
+        wi.preSearchit(ComicName=kwargs['comicname'], comicid=kwargs['comicid'], ComicRootPath=kwargs['filedir'],
+                       volume=kwargs['startyear'])
+
 
     def _queueIssue(self, **kwargs):
         if 'id' not in kwargs:

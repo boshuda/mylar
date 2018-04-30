@@ -94,6 +94,7 @@ class LocalSupervisor(Supervisor):
             # one (with config from setup_server, if declared).
             cherrypy.server.httpserver = None
 
+
         cherrypy.engine.start()
 
         self.sync_apps()

@@ -316,6 +316,8 @@ def main():
 
     # Start the background threads
     mylar.start()
+    logger.info('Python: {} {}'.format(sys.version, os.path.dirname(sys.executable)))
+    import html5lib
 
     signal.signal(signal.SIGTERM, handler_sigterm)
 
