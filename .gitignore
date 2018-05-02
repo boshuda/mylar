@@ -11,3 +11,5 @@ Thumbs.db
 ehtumbs.db
 Thumbs.db
 lib/comictaggerlib/ct_settings/
+*.bak
+Wanted_list.csv
