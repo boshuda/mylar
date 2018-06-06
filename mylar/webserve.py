@@ -17,6 +17,7 @@
 from __future__ import with_statement
 
 import os
+import io
 import sys
 import cherrypy
 import requests
@@ -679,17 +680,45 @@ class WebInterface(object):
 
         wcount=0
 
+        try:
+            f = io.open(except_file, mode="w+", encoding="utf-8")
+        except IOError:
+            logger.info("Error opening {}.  Is it being used by another program?".format(except_file))
+            return
+        else:
+            with f:
+                try:
+                    f.write(u"SeriesName,SeriesYear,IssueNumber,IssueDate,ComicID,IssueID\n")
+                    for want in wantlist:
+                        wantcomic = myDB.selectone("SELECT * FROM comics WHERE ComicID=?", [want['ComicID']]).fetchone()
+                        exceptln = u'{},{},{},{},{},{}\n'.format(wantcomic['ComicName'],wantcomic['ComicYear'], want['Issue_Number'], want['IssueDate'], want['ComicID'], want['IssueID'])
+                        wcount += 1
+                        f.write(exceptln)
+                        f.flush()
+                        logger.debug(exceptln)
+                except IOError as Argument:
+                    logger.info("Error writing value to {}.  {}".format(except_file, Argument))
+                except Exception as Argument:
+                    logger.info("Unknown error: {}".format(Argument))
+
+        '''
         with open(str(except_file), 'w+') as f:
             headrow = "SeriesName,SeriesYear,IssueNumber,IssueDate,ComicID,IssueID"
             headerline = headrow.decode('utf-8', 'ignore')
             f.write('%s\n' % (headerline.encode('ascii', 'replace').strip()))
             for want in wantlist:
+                logger.debug('{} #{}, {} SeriesID: {}; IssueID: {}'.format(
+                    want['ComicName'], want['Issue_Number'], want['IssueDate'], want['ComicID'], want['IssueID']))
                 wantcomic = myDB.selectone("SELECT * FROM comics WHERE ComicID=?", [want['ComicID']]).fetchone()
-                exceptln = wantcomic['ComicName'].encode('ascii', 'replace') + "," + str(wantcomic['ComicYear']) + "," + str(want['Issue_Number']) + "," + str(want['IssueDate']) + "," + str(want['ComicID']) + "," + str(want['IssueID'])
-                #logger.fdebug(exceptln)
-                wcount+=1
+                if wantcomic:
+                    # logger.debug(wantcomic['ComicName'].encode('ascii', 'replace') + "," + str(wantcomic['ComicYear']) + "," + str(want['Issue_Number']) + "," + str(want['IssueDate']) + "," + str(want['ComicID']) + "," + str(want['IssueID']))
+                    exceptln = wantcomic['ComicName'].encode('ascii', 'replace') + "," + str(wantcomic['ComicYear']) + "," + str(want['Issue_Number']) + "," + str(want['IssueDate']) + "," + str(want['ComicID']) + "," + str(want['IssueID'])
+                else:
+                    logger.debug("Failed to fetch a result from the comics table with ComicID={}".format(want['ComicID']))
+                logger.fdebug(exceptln)
+                wcount += 1
                 f.write('%s\n' % (exceptln.encode('ascii', 'replace').strip()))
-
+        '''
         logger.info("Successfully wrote to csv file " + str(wcount) + " entries from your " + mode + " list.")
 
         raise cherrypy.HTTPRedirect("home")
