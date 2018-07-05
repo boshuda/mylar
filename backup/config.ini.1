@@ -1,0 +1,369 @@
+[Client]
+nzb_downloader = 0
+torrent_downloader = 5
+
+[General]
+ignore_havetotal = False
+syno_fix = False
+nzb_startup_search = False
+create_folders = True
+skipped2wanted = False
+auto_update = False
+zero_level_n = none
+update_ended = False
+enable_rss = True
+grabbag_dir = None
+search_delay = 1
+rename_files = True
+file_format = $Series ($Year) $Issue ($Year$month)
+add_to_csv = True
+folder_scan_log_verbose = True
+interface = default
+comic_cover_local = True
+folder_format = $Publisher\$Imprint\$Series ($Year)
+delete_remove_dir = False
+failed_auto = True
+destination_dir = D:\Comic Books
+refresh_cache = 7
+failed_download_handling = True
+autowant_all = True
+use_maxsize = False
+read2filename = False
+oldconfig_version = None
+annuals_on = False
+launch_browser = False
+unicode_issuenumber = False
+show_icons = False
+send2read = False
+cache_dir = None
+dynamic_update = 4
+replace_char = .
+replace_spaces = False
+minimal_ini = False
+move_files = False
+preferred_quality = 0
+maintainseriesfolder = False
+use_minsize = False
+minsize = None
+wanted_tab_off = False
+alternate_latest_series_covers = False
+multiple_dest_dirs = None
+snatched_havetotal = False
+lowercase_filenames = False
+correct_metadata = False
+zero_level = False
+upcoming_snatched = True
+highcount = 0
+maxsize = None
+autowant_upcoming = True
+config_version = 8
+
+[NZBGet]
+nzbget_client_post_processing = False
+nzbget_category = None
+nzbget_priority = Default
+nzbget_directory = None
+nzbget_password = None
+nzbget_port = None
+nzbget_username = None
+nzbget_host = None
+
+[SABnzbd]
+sab_client_post_processing = True
+sab_to_mylar = False
+sab_host = http://localhost:8089
+sab_password = e98Zbd5n
+sab_apikey = f802e79c7de40136fa3a2722a6e8cf69
+sab_directory = None
+sab_category = comics
+sab_priority = Default
+sab_username = boshuda
+
+[PostProcess]
+pre_scripts = None
+snatch_script = None
+file_opts = move
+extra_scripts = None
+enable_snatch_script = False
+enable_check_folder = False
+local_torrent_pp = False
+check_folder = I:\Torrents\MylarComics
+snatchedtorrent_notify = True
+enable_extra_scripts = False
+post_processing = False
+post_processing_script = None
+enable_pre_scripts = False
+
+[Metatagging]
+setdefaultvolume = False
+cbr2cbz_only = False
+unrar_cmd = None
+ct_cbz_overwrite = False
+cmtag_volume = True
+enable_meta = True
+ct_settingspath = None
+cmtag_start_year_as_volume = True
+cmtagger_path = None
+ct_tag_cr = True
+ct_tag_cbl = True
+
+[Weekly]
+weekfolder = False
+pack_0day_watchlist_only = True
+weekfolder_format = 0
+alt_pull = 2
+weekfolder_loc = None
+biggie_pub = 55
+pull_refresh = None
+indie_pub = 75
+
+[Scheduler]
+search_interval = 360
+rss_checkinterval = 120
+download_scan_interval = 30
+check_github_interval = 360
+
+[Interface]
+http_password = None
+https_chain = None
+authentication = 0
+http_port = 8090
+login_timeout = 43800
+http_root = /
+https_force_on = False
+https_cert = None
+http_host = 0.0.0.0
+enable_https = False
+https_key = None
+host_return = None
+http_username = None
+
+[Import]
+imp_metadata = False
+comic_dir = None
+imp_move = False
+imp_rename = False
+add_comics = False
+
+[PUSHBULLET]
+pushbullet_channel_tag = None
+pushbullet_deviceid = None
+pushbullet_apikey = None
+pushbullet_enabled = False
+pushbullet_onsnatch = False
+
+[NMA]
+nma_priority = 0
+nma_onsnatch = False
+nma_apikey = None
+nma_enabled = False
+
+[Perms]
+chmod_file = 0660
+chowner = None
+enforce_perms = True
+chmod_dir = 0777
+chgroup = None
+
+[Deluge]
+deluge_host = None
+deluge_label = None
+deluge_username = None
+deluge_password = None
+
+[CV]
+cv_verify = True
+cv_only = True
+cvinfo = True
+blacklisted_publishers = None
+comicvine_api = 92d5db420ec5b850bd8db6dbedfb0b84964c006a
+cv_onetimer = True
+cvapi_rate = 2
+
+[Rtorrent]
+rtorrent_ca_bundle = None
+rtorrent_directory = None
+rtorrent_authentication = basic
+rtorrent_host = None
+rtorrent_label = None
+rtorrent_rpc_url = None
+rtorrent_startonload = False
+rtorrent_verify = False
+rtorrent_password = None
+rtorrent_ssl = False
+rtorrent_username = None
+
+[32P]
+mode_32p = False
+password_32p = None
+verify_32p = True
+enable_32p = False
+search_32p = False
+username_32p = None
+deep_search_32p = False
+passkey_32p = None
+rssfeed_32p = None
+
+[Newznab]
+newznab = True
+extra_newznabs = omgwtfnzbs, https://api.omgwtfnzbs.me, 1, f433e3a6e74ef56af231c1f0ef3e63a3, , 1, FastNZB, https://fastnzb.com/api, 1, Yk9wzIWqGSGUF735ZYWL3dPEibZfS3Qu, , 1, 6box, https://6box.me/api, 1, bc764c6c465c8173e22115df8d23da76, bc764c6c465c8173e22115df8d23da76, 1, NZB Geek, https://api.nzbgeek.info/, 1, 840af426ee354f57c0735b5728ba9a84, , 1, Db Kitty, https://dbkitty.club/api, 1, e33ba1d76e9f2f2da110291a1fb41d75, , 0
+
+[Torznab]
+extra_torznabs = 
+enable_torznab = False
+torznab_apikey = None
+torznab_category = None
+torznab_host = None
+torznab_verify = False
+torznab_name = None
+
+[Git]
+git_user = evilhero
+check_github = False
+git_path = None
+check_github_on_startup = False
+git_branch = None
+
+[Transmission]
+transmission_username = None
+transmission_host = None
+transmission_directory = None
+transmission_password = None
+
+[TELEGRAM]
+telegram_enabled = False
+telegram_token = None
+telegram_onsnatch = False
+telegram_userid = None
+
+[Tablet]
+tab_enable = False
+tab_host = None
+tab_directory = None
+tab_user = None
+tab_pass = None
+
+[qBittorrent]
+qbittorrent_startonload = True
+qbittorrent_username = boshuda
+qbittorrent_label = MylarComics
+qbittorrent_password = e98Kasn
+qbittorrent_folder = MylarComics
+qbittorrent_host = http://127.0.0.1:8091/
+
+[Providers]
+usenet_retention = 1500
+provider_order = 0, public torrents, 1, omgwtfnzbs, 2, FastNZB, 3, 6box, 4, NZB Geek
+
+[StoryArc]
+storyarcdir = False
+arc_folderformat = None
+copy2arcdir = False
+search_storyarcs = False
+upcoming_storyarcs = False
+arc_fileops = copy
+
+[Duplicates]
+ddump = True
+duplicate_dump = D:\__dupes__\Mylar
+dupeconstraint = filesize
+
+[PUSHOVER]
+pushover_enabled = False
+pushover_priority = 0
+pushover_userkey = None
+pushover_apikey = None
+pushover_onsnatch = False
+pushover_device = None
+
+[Experimental]
+altexperimental = False
+experimental = False
+
+[AutoSnatch]
+auto_snatch = False
+pp_sshuser = None
+auto_snatch_script = None
+pp_sshlocalcd = None
+pp_sshhost = None
+pp_sshport = 22
+pp_sshkeyfile = None
+pp_sshpasswd = None
+
+[Blackhole]
+blackhole_dir = None
+
+[NZBsu]
+nzbsu_apikey = None
+nzbsu = False
+nzbsu_uid = None
+nzbsu_verify = True
+
+[uTorrent]
+utorrent_password = None
+utorrent_username = None
+utorrent_host = None
+utorrent_label = None
+
+[Update]
+newcom_dir = None
+fftonewcom_dir = False
+locmove = False
+
+[Logs]
+log_dir = c:\Mylar\logs
+max_logsize = 10000000
+log_level = 2
+max_logfiles = 5
+
+[Watchdir]
+torrent_local = False
+local_watchdir = None
+
+[Torrents]
+enable_torrent_search = True
+enable_torrents = True
+minseeds = 0
+enable_public = True
+allow_packs = False
+
+[DOGnzb]
+dognzb = False
+dognzb_verify = True
+dognzb_apikey = None
+
+[OPDS]
+opds_metainfo = False
+opds_authentication = False
+opds_username = None
+opds_password = None
+opds_enable = False
+
+[Seedbox]
+seedbox_port = None
+seedbox_user = None
+seedbox_pass = None
+seedbox_watchdir = None
+seedbox_host = None
+torrent_seedbox = False
+
+[BOXCAR]
+boxcar_enabled = False
+boxcar_token = None
+boxcar_onsnatch = False
+
+[SLACK]
+slack_onsnatch = False
+slack_enabled = False
+slack_webhook_url = None
+
+[Prowl]
+prowl_enabled = False
+prowl_priority = 0
+prowl_keys = None
+prowl_onsnatch = False
+
+[API]
+api_key = c19936f203ae4fc59c98f0ccd198fca3
+api_enabled = True
+
