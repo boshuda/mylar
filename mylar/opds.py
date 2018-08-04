@@ -30,6 +30,7 @@ from operator import itemgetter
 from cherrypy.lib.static import serve_file, serve_download
 import datetime
 from mylar.webserve import serve_template
+import re
 
 cmd_list = ['root', 'Publishers', 'AllTitles', 'StoryArcs', 'ReadList', 'Comic', 'Publisher', 'Issue', 'StoryArc', 'Recent']
 
@@ -119,7 +120,8 @@ class OPDS(object):
         myDB = db.DBConnection()
         feed = {}
         feed['title'] = 'Mylar OPDS'
-        feed['id'] = 'OPDSRoot'
+        currenturi = cherrypy.url()
+        feed['id'] = re.sub('/', ':',  currenturi)
         feed['updated'] = mylar.helpers.now()
         links = []
         entries=[]
@@ -267,10 +269,10 @@ class OPDS(object):
             if comic['haveissues'] > 0:
                 entries.append(
                     {
-                        'title': escape('%s (%s) (%s)' % (comic['ComicName'], comic['ComicYear'], comic['haveissues'])),
-                        'id': escape('comic:%s (%s)' % (comic['ComicName'], comic['ComicYear'])),
+                        'title': escape('%s (%s) (comicID: %s)' % (comic['ComicName'], comic['ComicYear'], comic['ComicID'])),
+                        'id': escape('comic:%s (%s) [%s]' % (comic['ComicName'], comic['ComicYear'], comic['ComicID'])),
                         'updated': comic['DateAdded'],
-                        'content': escape('%s (%s) (%s)' % (comic['ComicName'], comic['ComicYear'], comic['haveissues'])),
+                        'content': escape('%s (%s)' % (comic['ComicName'], comic['ComicYear'])),
                         'href': '%s?cmd=Comic&amp;comicid=%s' % (self.opdsroot, quote_plus(comic['ComicID'])),
                         'kind': 'acquisition',
                         'rel': 'subsection',
@@ -304,10 +306,10 @@ class OPDS(object):
             if comic['ComicPublisher'] == kwargs['pubid'] and comic['haveissues'] > 0:
                 entries.append(
                     {
-                        'title': escape('%s (%s) (%s)' % (comic['ComicName'], comic['ComicYear'], comic['haveissues'])),
+                        'title': escape('%s (%s)' % (comic['ComicName'], comic['ComicYear'])),
                         'id': escape('comic:%s (%s)' % (comic['ComicName'], comic['ComicYear'])),
                         'updated': comic['DateAdded'],
-                        'content': escape('%s (%s) (%s)' % (comic['ComicName'], comic['ComicYear'], comic['haveissues'])),
+                        'content': escape('%s (%s)' % (comic['ComicName'], comic['ComicYear'])),
                         'href': '%s?cmd=Comic&amp;comicid=%s' % (self.opdsroot, quote_plus(comic['ComicID'])),
                         'kind': 'acquisition',
                         'rel': 'subsection',
@@ -383,7 +385,7 @@ class OPDS(object):
                 entries.append(
                     {
                         'title': title,
-                        'id': escape('comic:%s - %s' % (issue['ComicName'], issue['Issue_Number'])),
+                        'id': escape('comic:%s (%s) [%s] - %s' % (issue['ComicName'], comic['ComicYear'], comic['ComicID'], issue['Issue_Number'])),
                         'updated': updated,
                         'content': escape('%s' % (metainfo[0]['summary'])),
                         'href': '%s?cmd=Issue&amp;issueid=%s&amp;file=%s' % (self.opdsroot, quote_plus(issue['IssueID']),quote_plus(issue['Location'].encode('utf-8'))),
@@ -460,7 +462,7 @@ class OPDS(object):
                     entries.append(
                         {
                             'title': title,
-                            'id': escape('comic:%s - %s' % (issuebook['ComicName'], issuebook['Issue_Number'])),
+                            'id': escape('comic:%s (%s) - %s' % (issuebook['ComicName'], comic['ComicYear'], issuebook['Issue_Number'])),
                             'updated': updated,
                             'content': escape('%s' % (metainfo[0]['summary'])),
                             'href': '%s?cmd=Issue&amp;issueid=%s&amp;file=%s' % (self.opdsroot, quote_plus(issuebook['IssueID']),quote_plus(location)),
